@@ -19,7 +19,7 @@ import { Github, Linkedin, Mail, FileText, Code, CloudLightning, Server, Termina
             <div>
                 <h2 className="text-xl font-bold text-white mb-2">About Me</h2>
                 <p className="text-neutral-400 text-sm leading-relaxed">
-                I am a senior Computer Science student at the University of Houston, graduating in May 2026. My journey as a first-generation immigrant has instilled in me a robust work ethic and a hunger to learn. While I enjoy building user interfaces, I am most excited by what powers them underneath. I am actively diving deep into Cloud Infrastructure and DevOps practices, aiming to build resilient Full Stack applications that are as efficient as they are reliable.
+                I am a senior Computer Science student at the University of Houston, graduating in May 2026.At my core, I am a builder who is deeply interested with technology and how things work.While I have a strong background in Full Stack development, my true passion lies in Cloud Infrastructure and DevOps. I am actively diving deep into Cloud Infrastructure and DevOps practices, aiming to build resilient Full Stack applications that are as efficient as they are reliable.
                 </p>
                 <p className="text-neutral-400 text-sm leading-relaxed mt-4">
                 Currently, I am diving deep into Containers, Kubernetes, and AWS to enhance my understanding of scalable infrastructure. I am eager to connect with like-minded professionals and explore opportunities in software development and cloud engineering.
