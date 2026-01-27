@@ -1,197 +1,301 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, FileText, Code, CloudLightning, Server, Terminal, ExternalLink, Gamepad2 } from "lucide-react";export default function Home() {
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, Linkedin, Mail, FileText, Code, Server, Terminal, ExternalLink, ChevronDown, Database, Cpu, Layers, Cloud } from "lucide-react";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
+
+export default function Home() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight - 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 md:p-24 font-sans z-10 relative">
-      <div className="max-w-5xl w-full space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px, auto)]">
-
-          <Card className="md:col-span-2 row-span-1 flex flex-col justify-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-2 tracking-tight">
-              <span className="text-blue-500">Hi,I'm Alexis!</span>
-            </h1>
-            <p className="text-neutral-400 text-lg">
-              Software Developer & Director of Operations @ CougarCS.
-            </p>
-          </Card>
-          
-          <Card className="md:col-span-2 md:row-span-2 flex flex-col justify-between">
-            <div>
-                <h2 className="text-xl font-bold text-white mb-2">About Me</h2>
-                <p className="text-neutral-400 text-sm leading-relaxed">
-                I am a senior Computer Science student at the University of Houston, graduating in 2026.At my core, I am a builder who is deeply interested with technology and how things work.While I have a strong background in Full Stack development, my true passion lies in Cloud Infrastructure and DevOps. I am actively diving deep into Cloud Infrastructure and DevOps practices, aiming to build resilient Full Stack applications that are as efficient as they are reliable.
-                </p>
-                <p className="text-neutral-400 text-sm leading-relaxed mt-4">
-                Currently, I am diving deep into Containers, Kubernetes, and AWS to enhance my understanding of scalable infrastructure. I am eager to connect with like-minded professionals and explore opportunities in software development and cloud engineering.
-                </p>
-            </div>
-            <div className="mt-4 flex items-center gap-2 text-xs text-green-400 bg-green-400/10 w-fit px-3 py-1 rounded-full">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                Open to Work and Collaborate!
-            </div>
-          </Card>
-
-          <Link href="/resume.pdf" className="md:col-span-1 group">
-
-            <Card className="h-full flex flex-col items-center justify-center gap-4 hover:bg-neutral-800/80 cursor-pointer">
-
-                <div className="p-4 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300">
-
-                <FileText className="w-8 h-8 text-blue-400" />
-
-                </div>
-
-                <span className="font-semibold text-neutral-300 group-hover:text-white">Resume</span>
-
-            </Card>
-
-          </Link>
-
-          <Card className="md:col-span-1 bg-gradient-to-br from-purple-900/20 to-neutral-900/50 flex flex-col items-center justify-center text-center">
-             <Code className="w-8 h-8 text-purple-400 mb-3" />
-             <div className="text-xs font-mono text-neutral-400 space-y-1">
-               <p className="bg-neutral-800 px-2 py-1 rounded">Python • C++ </p>
-               <p className="bg-neutral-800 px-2 py-1 rounded">TypeScript</p>
-               <p className="bg-neutral-800 px-2 py-1 rounded">Postgre • AWS</p>
-               <p className="bg-neutral-800 px-2 py-1 rounded">Linux</p>
-             </div>
-          </Card>
-
-          <Card className="md:col-span-4 flex items-center justify-between py-6">
-            <h2 className="text-2xl font-bold text-neutral-500 hidden md:block">Let's Connect</h2>
-            <div className="flex gap-4 w-full md:w-auto justify-between md:justify-end">
-              <SocialLink href="https://github.com/justtalexx" icon={<Github size={20} />} label="GitHub" />
-              <SocialLink href="https://www.linkedin.com/in/alexis-orellana-ao/" icon={<Linkedin size={20} />} label="LinkedIn" />
-              <SocialLink href="mailto:alexorell121@gmail.com" icon={<Mail size={20} />} label="Email" />
-            </div>
-          </Card>
-        </div>
-
-        <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-                <CloudLightning className="text-blue-400" /> Featured Projects
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="group flex flex-col justify-between min-h-[250px] hover:border-blue-500/50">
-                    <div>
-                        <div className="flex justify-between items-start mb-4">
-                            <h4 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Houston Pulse (WIP)</h4>
-                            <ExternalLink className="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors" />
-                        </div>
-                        <p className="text-neutral-400 text-sm mb-4">
-                            An event aggregation platform built with Next.js and AWS Serverless. 
-                            It polls reliable sites for local events and aggregates them into a single dashboard.
-                        </p>
-                        <div className="flex gap-2 flex-wrap mb-4">
-                            <Badge>AWS Lambda</Badge>
-                            <Badge>EventBridge</Badge>
-                            <Badge>TypeScript</Badge>
-                        </div>
-                    </div>
-                </Card>
-
-                <Card className="group flex flex-col justify-between min-h-[250px] hover:border-purple-500/50">
-                    <div>
-                        <div className="flex justify-between items-start mb-4">
-                            <h4 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Workshop Manager System</h4>
-                            <Terminal className="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors" />
-                        </div>
-                        <p className="text-neutral-400 text-sm mb-4">
-                            Full-stack application with Role-Based Access Control (RBAC). 
-                            Engineered complex SQL triggers to automate business logic and built a secure RESTful API.
-                        </p>
-                        <div className="flex gap-2 flex-wrap mb-4">
-                            <Badge>React</Badge>
-                            <Badge>Node.js</Badge>
-                            <Badge>Postgres</Badge>
-                        </div>
-                    </div>
-                </Card>
-
-                  <Card className="group flex flex-col justify-between min-h-[250px] hover:border-blue-500/50">
-                    <div>
-                        <div className="flex justify-between items-start mb-4">
-                            <h4 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Serverless ETL Pipeline</h4>
-                            <Server className="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors" />
-                        </div>
-                        <p className="text-neutral-400 text-sm mb-4">
-                            Automated data extraction pipeline using AWS Step Functions and Lambda. 
-                            Handles file ingestion via S3 and stores processed metadata in DynamoDB with 99.9% uptime reliability.
-                        </p>
-                        <div className="flex gap-2 flex-wrap mb-4">
-                            <Badge>AWS Lambda</Badge>
-                            <Badge>Step Functions</Badge>
-                            <Badge>DynamoDB</Badge>
-                        </div>
-                    </div>
-                </Card>
-
-                <Card className="group flex flex-col justify-between min-h-[250px] hover:border-purple-500/50">
-                    <div>
-                        <div className="flex justify-between items-start mb-4">
-                            <h4 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">The Tides of Andúnië</h4>
-                            <Gamepad2 className="w-5 h-5 text-neutral-500 group-hover:text-white transition-colors" />
-                        </div>
-                        <p className="text-neutral-400 text-sm mb-4">
-                            A team-based game project built in Unity. I contributed art assets using Aseprite and implemented core gameplay mechanics.
-                        </p>
-                        <div className="flex gap-2 flex-wrap mb-4">
-                            <Badge>Unity</Badge>
-                            <Badge>C#</Badge>
-                            <Badge>Aseprite</Badge>
-                        </div>
-                    </div>
-                </Card>
-
-            </div>
-        </div>
-
-        <div className="text-center text-neutral-600 text-sm py-4">
-            © {new Date().getFullYear()} Alexis. Built with Next.js & Tailwind.
-        </div>
-
+    <div className="min-h-screen bg-black text-neutral-200 font-sans selection:bg-blue-500/30">
+      
+      {/* 1. BACKGROUND */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-60">
+        <ShootingStars />
+        <StarsBackground />
       </div>
+
+      {/* 2. STICKY HEADER */}
+      <AnimatePresence>
+        {scrolled && (
+          <motion.nav 
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4"
+          >
+            <div className="max-w-5xl mx-auto flex justify-between items-center">
+              <span className="font-bold text-white text-xl tracking-tight">AO</span>
+              <div className="flex gap-6 text-sm font-medium text-neutral-400">
+                <Link href="#about" className="hover:text-blue-400 transition-colors">About</Link>
+                <Link href="#experience" className="hover:text-blue-400 transition-colors">Experience</Link>
+                <Link href="#projects" className="hover:text-blue-400 transition-colors">Projects</Link>
+                <Link href="#contact" className="hover:text-blue-400 transition-colors">Contact</Link>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      <main className="relative z-10">
+        
+        {/* --- HERO SECTION --- */}
+        <section className="h-screen flex flex-col items-center justify-center text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+              Hello, I'm <br />
+              <span className="text-blue-500">Alexis Orellana</span>
+            </h1>
+            <h2 className="text-xl md:text-2xl text-neutral-400 font-light mb-10">
+              Software Developer.
+            </h2>
+
+            {/* BUTTONS */}
+            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+              <Link 
+                href="#projects" 
+                className="px-8 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 hover:scale-105 transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]"
+              >
+                View My Work
+              </Link>
+              
+              <a 
+                href="mailto:alexorell121@gmail.com"
+                className="px-8 py-3 rounded-full border border-neutral-700 text-neutral-300 font-medium hover:bg-neutral-800 hover:text-white hover:border-white transition-all flex items-center gap-2"
+              >
+                <Mail size={18} /> Get In Touch
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Scroll Down Indicator */}
+          <motion.div 
+            animate={{ y: [0, 10, 0] }} 
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="absolute bottom-10 text-neutral-600"
+          >
+            <ChevronDown size={32} />
+          </motion.div>
+        </section>
+
+
+        {/* --- 01. ABOUT ME --- */}
+        <section id="about" className="max-w-4xl mx-auto py-24 px-6 scroll-mt-20">
+          <SectionTitle number="01" title="About Me" />
+          
+          <div className="space-y-6 text-neutral-400 text-lg leading-relaxed">
+            <p>
+              I am a Computer Science senior at the <b>University of Houston</b> (Class of 2026) with a minor in Mathematics. 
+              My interests span systems programming, algorithm optimization, and scalable cloud infrastructure.
+            </p>
+            <p>
+              Currently, I serve as the <b>Director of Operations</b> for CougarCS, where I manage logistics and lead teams. 
+              Previously, I interned at <b>AWS</b>, where I automated CI/CD pipelines and practiced maintaining 99.9% uptime for cloud applications.
+            </p>
+            <p>
+              I value precision and efficiency in my work. Whether I’m debugging a distributed system or writing a Bash script to automate a repetitive task, I focus on building solutions that are practical, reliable, and easy to maintain. I care about understanding problems deeply and choosing straightforward approaches that scale well over time.
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-white font-bold mb-6 flex items-center gap-2">
+              <Terminal className="text-blue-500" size={20}/> Technologies I Work With
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <TechBadge icon="☕" name="Java" />
+              <TechBadge icon="🐍" name="Python" />
+              <TechBadge icon="⚙️" name="C++" />
+              <TechBadge icon="☁️" name="AWS" />
+              <TechBadge icon="🐧" name="Linux" />
+              <TechBadge icon="🗄️" name="MySQL" />
+              <TechBadge icon="🐚" name="Bash" />
+              <TechBadge icon="🐙" name="Git" />
+            </div>
+          </div>
+        </section>
+
+
+        {/* --- 02. EXPERIENCE --- */}
+        <section id="experience" className="max-w-4xl mx-auto py-24 px-6 scroll-mt-20">
+           <SectionTitle number="02" title="Experience" />
+           
+           <div className="space-y-12">
+             <ExperienceItem 
+                role="Cloud Support Engineering Intern" 
+                company="Amazon Web Services (AWS)"
+                date="May 2025 – Aug 2025"
+                desc={[
+                  "Automated software delivery by constructing a CI/CD pipeline with AWS CodePipeline.",
+                  "Deployed a fault-tolerant web app using ALB, ASG, and EC2, achieving 99.9% uptime.",
+                  "Resolved complex global cloud challenges using advanced AWS diagnostic tools."
+                ]}
+             />
+             
+             <ExperienceItem 
+                role="Director of Operations" 
+                company="CougarCS"
+                date="Dec 2025 – Present"
+                desc={[
+                  "Manage a 4-person Operations Committee for event setup and logistics.",
+                  "Orchestrate resource procurement for large-scale events while maintaining budget compliance.",
+                  "Implement strict inventory control protocols for 100% asset accountability."
+                ]}
+             />
+           </div>
+        </section>
+
+
+        {/* --- 03. PROJECTS --- */}
+        <section id="projects" className="max-w-6xl mx-auto py-24 px-6 scroll-mt-20">
+           <SectionTitle number="03" title="Projects" />
+
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
+              <ProjectCard 
+                title="Serverless Metadata Pipeline"
+                tags={["AWS Lambda", "DynamoDB", "Step Functions"]}
+                desc="Architected an event-driven ETL pipeline handling file ingestion via S3 and NoSQL storage. Scales to handle 10,000 concurrent uploads with zero server management."
+                icon={<Cloud className="text-blue-400" />}
+                repoUrl="https://github.com/justtalexx" 
+              />
+
+              <ProjectCard 
+                title="Workshop Management System"
+                tags={["React", "Node.js", "MySQL"]}
+                desc="Full-stack RBAC system for student makers. Engineered complex SQL triggers for business logic and a secure API for managing project materials."
+                icon={<Database className="text-purple-400" />}
+                repoUrl="https://github.com/justtalexx" 
+              />
+
+              <ProjectCard 
+                title="Distributed Trading Platform"
+                tags={["Java", "Spring Boot", "RabbitMQ"]}
+                desc="Decoupled market data ingestion from trade execution using RabbitMQ to prevent blocking during volatility. Implemented precise currency handling with Java BigDecimal."
+                icon={<Cpu className="text-green-400" />}
+                repoUrl="https://github.com/justtalexx"
+              />
+           </div>
+        </section>
+
+
+        {/* --- 04. CONTACT --- */}
+        <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Get In Touch</h2>
+          <p className="text-neutral-400 mb-8 max-w-lg mx-auto">
+             I am currently looking for full-time opportunities in DevOps and Software Engineering. 
+             Whether you have a question or just want to say hi, my inbox is always open.
+          </p>
+          
+          <div className="flex justify-center gap-6">
+             <a href="mailto:alexorell121@gmail.com" className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-medium shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+               Say Hello
+             </a>
+             <Link href="/resume.pdf" target="_blank" className="px-8 py-3 border border-neutral-700 text-neutral-300 rounded-lg hover:bg-neutral-800 transition-all font-medium flex items-center gap-2">
+               <FileText size={18}/> Resume
+             </Link>
+          </div>
+
+          <div className="mt-20 border-t border-neutral-900 pt-8 flex justify-center gap-6 text-neutral-600">
+             <a href="https://github.com/justtalexx" target="_blank" className="hover:text-white transition-colors"><Github /></a>
+             <a href="https://linkedin.com/in/alexis-orellana-ao" target="_blank" className="hover:text-white transition-colors"><Linkedin /></a>
+          </div>
+        </section>
+
+      </main>
     </div>
   );
 }
 
-// Reusable Card stuf
-function Card({ className, children }: { className?: string, children: React.ReactNode }) {
+// --- COMPONENTS ---
+
+function SectionTitle({ number, title }: { number: string, title: string }) {
   return (
-    <div className={`
-      relative overflow-hidden rounded-3xl p-6 
-      bg-neutral-900/60 border border-white/10 backdrop-blur-md
-      transition-all duration-300 ease-in-out
-      hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:-translate-y-1
-      ${className}
-    `}>
-      {children}
+    <div className="flex items-center gap-4 mb-12">
+      <span className="text-blue-500 font-mono text-xl">{number}.</span>
+      <h2 className="text-3xl font-bold text-white">{title}</h2>
+      <div className="h-[1px] bg-neutral-800 flex-grow max-w-[200px]"></div>
     </div>
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-neutral-300 font-mono">
-            {children}
-        </span>
-    );
+function TechBadge({ icon, name }: { icon: string, name: string }) {
+  return (
+    <div className="flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 px-4 py-3 rounded-lg hover:border-blue-500/30 transition-colors cursor-default hover:scale-105 transform duration-200">
+      <span className="text-lg">{icon}</span>
+      <span className="text-neutral-300 font-mono text-sm">{name}</span>
+    </div>
+  );
 }
 
-function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode, label: string }) {
+function ExperienceItem({ role, company, date, desc }: { role: string, company: string, date: string, desc: string[] }) {
+  return (
+    <div className="relative pl-8 border-l border-neutral-800 hover:border-blue-500/50 transition-colors duration-300">
+      <div className="absolute -left-[5px] top-2 w-[9px] h-[9px] rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+      <h3 className="text-xl font-bold text-white">{role}</h3>
+      <p className="text-blue-400 font-mono text-sm mb-4">{company} • {date}</p>
+      <ul className="space-y-2 text-neutral-400">
+        {desc.map((item, i) => (
+          <li key={i} className="flex gap-2">
+            <span className="text-neutral-600 mt-1.5">▹</span> 
+            <span className="leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ProjectCard({ title, tags, desc, icon, repoUrl }: { title: string, tags: string[], desc: string, icon: React.ReactNode, repoUrl: string }) {
   return (
     <a 
-      href={href} 
+      href={repoUrl} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="flex items-center gap-2 px-4 py-2 bg-neutral-800 rounded-full text-neutral-300 hover:bg-white hover:text-black transition-all duration-300 hover:scale-105 font-medium text-sm"
+      className="block bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-[0_10px_30px_-15px_rgba(37,99,235,0.2)] transition-all duration-300 group cursor-pointer"
     >
-      {icon}
-      <span>{label}</span>
+      <div className="flex justify-between items-start mb-4">
+        <div className="p-3 bg-neutral-800 rounded-lg group-hover:bg-blue-500/10 transition-colors">
+          {icon}
+        </div>
+        <div className="flex gap-3 text-neutral-500">
+           <Github size={18} className="hover:text-white transition-colors"/>
+           <ExternalLink size={18} className="hover:text-white transition-colors"/>
+        </div>
+      </div>
+      
+      <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{title}</h3>
+      
+      <p className="text-neutral-400 text-sm mb-6 leading-relaxed h-[80px]">
+        {desc}
+      </p>
+      
+      <div className="flex flex-wrap gap-2 mt-auto">
+        {tags.map((tag) => (
+          <span key={tag} className="text-xs font-mono text-blue-400/80 bg-blue-400/5 px-2 py-1 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
     </a>
   );
 }
